@@ -2,8 +2,6 @@
 
 A local-first VS Code extension for reviewing right-to-left text and direction-sensitive layouts. Version **0.1.0** is an installable development release, with a shared Unicode layer and separate LaTeX, CSS and Tailwind analyzers.
 
-فارسی: راهنمای فارسی در فایل `README.fa.md` همراه پروژه قرار دارد.
-
 ## Install
 
 Requires desktop VS Code **1.95 or newer**. In the Extensions view, open the `…` menu, choose **Install from VSIX…**, and select `rtl-layout-guard-0.1.0.vsix`. Reload VS Code if prompted. No account, API key or companion extension is required.
