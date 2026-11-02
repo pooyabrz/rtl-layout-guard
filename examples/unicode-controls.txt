@@ -1,0 +1,4 @@
+Valid isolate pair: فارسی ⁦React 19⁩ ادامه
+Override to review: ‮abc‬
+Unclosed isolate: ⁦English
+Persian half-space stays valid: می‌نویسم

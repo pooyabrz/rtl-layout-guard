@@ -1,0 +1,9 @@
+node_modules/
+dist/
+out/
+*.vsix
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+*.fa.md

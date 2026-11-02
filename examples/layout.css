@@ -1,0 +1,14 @@
+/* Open Problems, select a suggestion, then use Ctrl+. to review alternatives. */
+.card {
+  margin-left: 16px;
+  padding-right: 12px;
+  border-left: 3px solid teal;
+  text-align: right;
+}
+
+/* Already direction-aware: no physical-side suggestions here. */
+.logical-card {
+  margin-inline-start: 16px;
+  padding-inline-end: 12px;
+  text-align: start;
+}

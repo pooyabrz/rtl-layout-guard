@@ -1,0 +1,15 @@
+src/**
+tests/**
+scripts/**
+node_modules/**
+.vscode/**
+.github/**
+out/**
+dist/core.cjs
+tsconfig.json
+package-lock.json
+*.zip
+*.vsix
+**/*.log
+**/*.aux
+**/*.pdf

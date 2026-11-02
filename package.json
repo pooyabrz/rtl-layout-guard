@@ -1,0 +1,226 @@
+{
+  "name": "rtl-layout-guard",
+  "displayName": "RTL Layout Guard — Persian, Arabic & LaTeX",
+  "description": "Right-to-left (RTL) text checks for Persian, Arabic and Hebrew, with LaTeX helpers, Unicode bidi inspection, CSS/Tailwind suggestions and text preview.",
+  "version": "0.1.0",
+  "publisher": "pooyabrz",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "rtl",
+    "right-to-left",
+    "rtl-support",
+    "bidi",
+    "bidirectional",
+    "persian",
+    "farsi",
+    "arabic",
+    "hebrew",
+    "latex",
+    "xepersian",
+    "tex",
+    "unicode",
+    "css",
+    "tailwind",
+    "tailwindcss",
+    "react",
+    "markdown",
+    "text-direction",
+    "فارسی",
+    "عربی",
+    "راست به چپ"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pooyabrz/rtl-layout-guard.git"
+  },
+  "homepage": "https://github.com/pooyabrz/rtl-layout-guard#readme",
+  "bugs": {
+    "url": "https://github.com/pooyabrz/rtl-layout-guard/issues"
+  },
+  "galleryBanner": {
+    "color": "#102532",
+    "theme": "dark"
+  },
+  "icon": "media/icon.png",
+  "main": "./dist/extension.cjs",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "rtlLayoutGuard.scanDocument",
+        "title": "RTL Guard: Scan Current Document"
+      },
+      {
+        "command": "rtlLayoutGuard.scanWorkspace",
+        "title": "RTL Guard: Scan Workspace"
+      },
+      {
+        "command": "rtlLayoutGuard.preview",
+        "title": "RTL Guard: Open Direction-Aware Text Preview"
+      },
+      {
+        "command": "rtlLayoutGuard.wrapLtr",
+        "title": "RTL Guard: Wrap Selected Text as LTR"
+      },
+      {
+        "command": "rtlLayoutGuard.wrapRtl",
+        "title": "RTL Guard: Wrap Selected Text as RTL"
+      },
+      {
+        "command": "rtlLayoutGuard.inspectControls",
+        "title": "RTL Guard: Inspect Invisible Direction Controls"
+      },
+      {
+        "command": "rtlLayoutGuard.toggle",
+        "title": "RTL Guard: Enable / Disable for This Workspace"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "rtlLayoutGuard.preview",
+          "group": "rtlguard@1"
+        },
+        {
+          "command": "rtlLayoutGuard.wrapLtr",
+          "when": "editorHasSelection",
+          "group": "rtlguard@2"
+        },
+        {
+          "command": "rtlLayoutGuard.wrapRtl",
+          "when": "editorHasSelection",
+          "group": "rtlguard@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "RTL Layout Guard",
+      "properties": {
+        "rtlLayoutGuard.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable local diagnostics."
+        },
+        "rtlLayoutGuard.css.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Review physical left/right CSS and JSX style properties. These are suggestions, not proof of a layout bug."
+        },
+        "rtlLayoutGuard.tailwind.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Review physical left/right utilities in static class attributes and configured class helper calls."
+        },
+        "rtlLayoutGuard.tailwind.classFunctions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "cn",
+            "clsx",
+            "classNames",
+            "twMerge"
+          ],
+          "description": "Class-name helpers whose static arguments can be checked."
+        },
+        "rtlLayoutGuard.latex.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "rtlLayoutGuard.latex.directionPackage": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "xepersian",
+            "bidi",
+            "none"
+          ],
+          "default": "auto",
+          "description": "Select a wrapper provider if your preamble is loaded indirectly. Auto recognizes XePersian, bidi/luabidi and RTL Polyglossia. Other setups receive advice without macro fixes."
+        },
+        "rtlLayoutGuard.latex.mixedLatin": {
+          "type": "boolean",
+          "default": true,
+          "description": "Suggest explicit direction for unwrapped Latin runs in RTL LaTeX prose. Math, comments and known code/direction environments are skipped."
+        },
+        "rtlLayoutGuard.unicode.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Inspect literal Unicode bidi controls in every text document, regardless of language. ZWNJ and ZWJ are not flagged."
+        },
+        "rtlLayoutGuard.preview.direction": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "rtl",
+            "ltr"
+          ],
+          "default": "auto"
+        },
+        "rtlLayoutGuard.maxFileSizeKB": {
+          "type": "integer",
+          "default": 512,
+          "minimum": 16,
+          "maximum": 4096
+        },
+        "rtlLayoutGuard.workspace.include": {
+          "type": "string",
+          "default": "**/*.{css,scss,html,htm,vue,svelte,jsx,tsx,js,ts,tex,ltx,md,mdx,txt,json,yaml,yml,rst,py,ipynb}",
+          "description": "Glob for explicit workspace scans. All open text documents are checked for Unicode controls."
+        },
+        "rtlLayoutGuard.workspace.exclude": {
+          "type": "string",
+          "default": "**/{node_modules,.git,dist,build,out,vendor,.venv}/**"
+        },
+        "rtlLayoutGuard.workspace.maxFiles": {
+          "type": "integer",
+          "default": 500,
+          "minimum": 1,
+          "maximum": 5000
+        },
+        "rtlLayoutGuard.ignoredRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Rule IDs to ignore, for example css/physical-property or latex/mixed-latin."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "vscode:prepublish": "npm run check && npm run build",
+    "package": "vsce package --no-dependencies --allow-missing-repository --out ../deliverables/rtl-layout-guard-0.1.0.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.0",
+    "@types/vscode": "1.95.0",
+    "@vscode/vsce": "3.6.0",
+    "esbuild": "0.25.10",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "postcss": "8.5.32",
+    "postcss-safe-parser": "7.0.1"
+  }
+}
